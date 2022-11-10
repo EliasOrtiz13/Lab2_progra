@@ -15,18 +15,9 @@ app.use(express.json()) //requiridos
 app.get('/', (req, res) => {
     res
         .send(//Codigo HTML de la pagina principal
-        '<html><title>MiApi</title><body><h1> Data de Clientes </h1><a href= "/api/clientes">Lista de Clientes</a></body></html>'
+        '<html><title>MiApi</title><body><h1> Data de Clientes </h1><a href= "/clientes">Lista de Clientes</a></body></html>'
         )
 })
-
-// ==========================
-//Muestra los datos de data.js
-app.get('/api/clientes', (req, res) => {
-    res
-        .status(200) 
-        .json({ success: true, data: Clientes}) 
-})
-// ==========================
 
 // Read: todos los items
 app.get('/clientes', async (req, res) => {
@@ -68,7 +59,6 @@ app.post('/clientes', async (req, res) => { // async -> await
         res.status(422).send({ error: 'No puede ingresar números en el apellido y el nombre'})
     return
     }
-
     const client = {
         dni,
         apellido,
@@ -83,7 +73,6 @@ app.post('/clientes', async (req, res) => { // async -> await
     }
 })
 
-// Revisar ===============================================
 // Update
 app.patch('/clientes/:id', async (req, res) => {
     const id = req.params.id
@@ -105,8 +94,6 @@ app.patch('/clientes/:id', async (req, res) => {
     }  
 })
 
-
-
 // Delete
 app.delete('/clientes/:id', async (req, res) => {
     const id = req.params.id
@@ -123,15 +110,19 @@ app.delete('/clientes/:id', async (req, res) => {
     }
 })
 
-
 mongoose.connect(
     `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.dmxxpiz.mongodb.net/${Name_DB}?retryWrites=true&w=majority`
     // Despues de .net/  colocar el nombre de la base de datos de Mongo
-    
     ).then(() => {
         console.log('Connectado al MONGODB')
         app.listen(5000)
     })
     .catch((err) => {
         console.log(err)
+})
+
+app.all('*', (req, res) => {
+    res
+        .status(404) //Error
+        .send('<h1>NO ENCONTRADO</h1>') //Pagina por defecto cuando no se encuentra la direccion url
 })
