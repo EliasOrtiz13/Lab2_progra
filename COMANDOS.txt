@@ -1,0 +1,7 @@
+PASOS:
+1. npm init -y 
+2. en package.json:   "scripts": {
+    "start": "nodemon app.js"
+}
+3. npm install nodemon express mongoose
+4. npm run start
