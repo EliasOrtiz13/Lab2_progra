@@ -6,9 +6,14 @@ const Clientes = require('./data/Clientes')
 
 const app = express() //invocando el express
 
-const DB_USER = 'test'
-const DB_PASSWORD = 'test'
 const Name_DB = 'dataClient' // Nombre de la database
+const DB_USER = 'elias'
+const DB_PASSWORD = 'elias'
+
+// =======Configuracion de mi compañero=======
+// const DB_USER = 'cristhian'
+// const DB_PASSWORD = 'cristhian'
+// ===========================================
 
 app.use(express.json()) //requiridos
 
@@ -111,8 +116,10 @@ app.delete('/clientes/:id', async (req, res) => {
 })
 
 mongoose.connect(
-    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.dmxxpiz.mongodb.net/${Name_DB}?retryWrites=true&w=majority`
+    //`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.dmxxpiz.mongodb.net/${Name_DB}?retryWrites=true&w=majority` // obs
     // Despues de .net/  colocar el nombre de la base de datos de Mongo
+    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@myapi.hxjesbx.mongodb.net/${Name_DB}?retryWrites=true&w=majority`
+
     ).then(() => {
         console.log('Connectado al MONGODB')
         app.listen(5000)
