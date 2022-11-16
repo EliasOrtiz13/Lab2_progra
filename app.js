@@ -116,10 +116,8 @@ app.delete('/clientes/:id', async (req, res) => {
 })
 
 mongoose.connect(
-    //`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.dmxxpiz.mongodb.net/${Name_DB}?retryWrites=true&w=majority` // obs
-    // Despues de .net/  colocar el nombre de la base de datos de Mongo
     `mongodb+srv://${DB_USER}:${DB_PASSWORD}@myapi.hxjesbx.mongodb.net/${Name_DB}?retryWrites=true&w=majority`
-
+    // Despues de .net/  colocar el nombre de la base de datos de Mongo
     ).then(() => {
         console.log('Connectado al MONGODB')
         app.listen(5000)
